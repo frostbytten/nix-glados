@@ -17,8 +17,8 @@
 						};
 					in
 					{
-                                          imports = [ ./hardware-configuration.nix ];
-					  fileSystems."/" = { options = [ "noatime", "nodiratime" ]; };
+            imports = [ ./hardware-configuration.nix ];
+					  fileSystems."/" = { options = [ "noatime" "nodiratime" ]; };
 
 						boot = {
 						  kernelPackages = pkgs.linuxPackages_latest;
@@ -51,7 +51,7 @@
 
 						i18n = {
 						  defaultLocale = "en_US.UTF-8";
-							supportedLocales = [ "en_US.UTF-8/UTF-8";
+							supportedLocales = [ "en_US.UTF-8/UTF-8" ];
 						};
 
 						console = {
@@ -98,6 +98,8 @@
 							extraOptions = ''
 							  experimental-features = nix-command flakes
 							'';
+              keep-outputs = true;
+              keep-derivations = true;
 						};
 
 						gc = {
@@ -110,9 +112,8 @@
 						  automatic = true;
 							dates = [ "weekly" ];
 						};
-
-						system.stateVersion = "21.05";
-				  };
+            system.stateVersion = "21.05";
+				  }
 				)
 			  nixos-hardware.nixosModules.apple-macbook-pro-11-5
 			];
