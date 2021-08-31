@@ -47,7 +47,7 @@
               useDHCP = false;
               interfaces.wlp4s0.useDHCP = true;
               wireless.enable = true;
-              wireless.interface.interfaces = [ "wlp4s0" ];
+              wireless.interfaces = [ "wlp4s0" ];
             };
 
             security = {
