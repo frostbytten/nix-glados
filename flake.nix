@@ -6,7 +6,7 @@
     nixos-hardware.url = "github:frostbytten/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nix-hardware, ... }: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, ... }: {
     nixosConfigurations.glados = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
