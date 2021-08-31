@@ -61,8 +61,9 @@
             };
 
             console = {
-              font = "Lat2-Terminus16";
-              keyMap = "us";
+              packages = [ pkgs.terminus-fonts ];
+              font = "ter-v32n";
+              useXkbConfig = true;
             };
 
             users.users.frostbytten = {
@@ -83,16 +84,22 @@
                 ls = "ls --color=auto";
                 ll = "ls -la --color=auto";
               };
-            };
+           };
+           
+           services = {
+             xserver = {
+               layout = "us";
+               xkbOptions = "ctrl:nocaps";
+             };
+           };
 
-            nixpkgs = {
-              overlays = [ overlay-unstable ];
-
-              config = {
+           nixpkgs = {
+             overlays = [ overlay-unstable ];
+             config = {
                 allowBroken = true;
                 allowUnfree = true;
-              };
-            };
+             };
+           };
 
             nix = {
               package = pkgs.nixFlakes;
