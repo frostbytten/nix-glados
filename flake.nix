@@ -30,11 +30,14 @@
                   enable = true;
                   version = 2;
                   efiSupport = true;
-                  enableCryptodisk = 2;
+                  enableCryptodisk = true;
                   device = "nodev";
                 };
               };
-              initrd.luks.devices.crypt.device = "/dev/sda2";
+              initrd.luks.devices.crypt = {
+               device = "/dev/sda2";
+               preLVM = true;
+              };
             };
 
             time.timezone = "America/New_York";
