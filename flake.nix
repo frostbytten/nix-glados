@@ -10,7 +10,7 @@
     nixosConfigurations.glados = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        # nixos-hardware.nixosModules.apple-macbook-pro-11-5
+        nixos-hardware.nixosModules.apple-macbook-pro-11-5
         ({ config, pkgs, ... }:
           let
             overlay-unstable = final: prev: {
