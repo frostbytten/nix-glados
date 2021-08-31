@@ -47,6 +47,7 @@
               useDHCP = false;
               interfaces.wlp4s0.useDHCP = true;
               wireless.enable = true;
+              wireless.interface.interfaces = [ "wlp4s0" ];
             };
 
             security = {
@@ -76,14 +77,14 @@
                   vis
                   curl
               ];
+
+              shellAliases = {
+                ls = "ls --color=auto";
+                ll = "ls -la --color=auto";
+              };
             };
 
-            shellAliases = {
-              ls = "ls --color=auto";
-              ll = "ls -la --color=auto";
-            };
-
-            nixpgks = {
+            nixpkgs = {
               overlays = [ overlay-unstable ];
 
               config = {
@@ -101,20 +102,20 @@
               trustedUsers = [ "@wheel" ];
               extraOptions = ''
                 experimental-features = nix-command flakes
-                '';
-              keep-outputs = true;
-              keep-derivations = true;
-            };
+                keep-outputs = true
+                keep-derivations = true
+              '';
 
-            gc = {
-              automatic = true;
-              dates = "weekly";
-              options = "--delete-older-than 7d --max-freed $((64 * 1024**3))";
-            };
-
-            optimise = {
-              automatic = true;
-              dates = [ "weekly" ];
+              gc = {
+                automatic = true;
+                dates = "weekly";
+                options = "--delete-older-than 7d --max-freed $((64 * 1024**3))";
+              };
+  
+              optimise = {
+                automatic = true;
+                dates = [ "weekly" ];
+              };
             };
             system.stateVersion = "21.05";
           }
