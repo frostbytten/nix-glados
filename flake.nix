@@ -48,6 +48,7 @@
               interfaces.wlp4s0.useDHCP = true;
               wireless.enable = true;
               wireless.interfaces = [ "wlp4s0" ];
+              wireless.userControlled.enable = true;
             };
 
             security = {
