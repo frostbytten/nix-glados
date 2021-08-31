@@ -61,8 +61,10 @@
             };
 
             console = {
-              font = "Lat2-Terminus16";
+              packages = [ pkgs.terminus_font ];
+              font = "ter-v32n";
               keyMap = "us";
+              earlySetup = true;
             };
 
             users.users.frostbytten = {
