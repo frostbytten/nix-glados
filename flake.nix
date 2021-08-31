@@ -10,7 +10,7 @@
     nixosConfigurations.glados = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        nixos-hardware.nixosModules.apple-macbook-pro-11-5
+        # nixos-hardware.nixosModules.apple-macbook-pro-11-5
         ({ config, pkgs, ... }:
           let
             overlay-unstable = final: prev: {
@@ -46,9 +46,7 @@
               hostName = "glados";
               useDHCP = false;
               interfaces.wlp4s0.useDHCP = true;
-              wireless.enable = true;
-              wireless.interfaces = [ "wlp4s0" ];
-              wireless.userControlled.enable = true;
+              networkmanager.enable = true;
             };
 
             security = {
@@ -61,14 +59,12 @@
             };
 
             console = {
-              packages = [ pkgs.terminus-fonts ];
-              font = "ter-v32n";
               useXkbConfig = true;
             };
 
             users.users.frostbytten = {
               isNormalUser = true;
-              extraGroups = [ "wheel" ];
+              extraGroups = [ "wheel" "networkmanager" ];
               hashedPassword = "$6$k30CF7ugQ7dp$G9deLiP5wetj7om06ONBmUIbPnNi.qdRAxgh0c.JLCVTHUy608k8irhpW7T3jePC4cmn9y.L415HFe/6UTlyy1";
             };
 
