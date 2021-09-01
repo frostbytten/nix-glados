@@ -4,13 +4,19 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-21.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:frostbytten/nixos-hardware/master";
+    home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, ... }: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, ... }: {
     nixosConfigurations.glados = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         nixos-hardware.nixosModules.apple-macbook-pro-11-5
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.frostbytten = import ./hm-frostbytten.nix;
+        }
         ({ config, pkgs, ... }:
           let
             overlay-unstable = final: prev: {
@@ -84,6 +90,7 @@
            
            services = {
              xserver = {
+               enable = true;
                layout = "us";
                xkbOptions = "ctrl:nocaps";
              };
