@@ -46,9 +46,7 @@
               hostName = "glados";
               useDHCP = false;
               interfaces.wlp4s0.useDHCP = true;
-              wireless.enable = true;
-              wireless.interfaces = [ "wlp4s0" ];
-              wireless.userControlled.enable = true;
+              networkmanager.enable = true;
             };
 
             security = {
@@ -61,15 +59,12 @@
             };
 
             console = {
-              packages = [ pkgs.terminus_font ];
-              font = "ter-v32n";
-              keyMap = "us";
-              earlySetup = true;
+              useXkbConfig = true;
             };
 
             users.users.frostbytten = {
               isNormalUser = true;
-              extraGroups = [ "wheel" ];
+              extraGroups = [ "wheel" "networkmanager" ];
               hashedPassword = "$6$k30CF7ugQ7dp$G9deLiP5wetj7om06ONBmUIbPnNi.qdRAxgh0c.JLCVTHUy608k8irhpW7T3jePC4cmn9y.L415HFe/6UTlyy1";
             };
 
@@ -85,16 +80,22 @@
                 ls = "ls --color=auto";
                 ll = "ls -la --color=auto";
               };
-            };
+           };
+           
+           services = {
+             xserver = {
+               layout = "us";
+               xkbOptions = "ctrl:nocaps";
+             };
+           };
 
-            nixpkgs = {
-              overlays = [ overlay-unstable ];
-
-              config = {
+           nixpkgs = {
+             overlays = [ overlay-unstable ];
+             config = {
                 allowBroken = true;
                 allowUnfree = true;
-              };
-            };
+             };
+           };
 
             nix = {
               package = pkgs.nixFlakes;
