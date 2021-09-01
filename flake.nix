@@ -88,6 +88,11 @@
                enable = true;
                layout = "us";
                xkbOptions = "ctrl:nocaps";
+               desktopManager.xterm.enable = false;
+               displayManager.defaultSession = "none+i3";
+               windowManager.i3 = {
+                 enable = true;
+                 extraPackages = [ pkgs.dmenu ];
              };
            };
 
