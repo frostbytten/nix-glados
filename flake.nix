@@ -1,4 +1,4 @@
-{
+_{
   description = "NixOS configuration for GLaDOS";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -93,6 +93,7 @@
                windowManager.i3 = {
                  enable = true;
                  extraPackages = [ pkgs.dmenu ];
+               };
              };
            };
 
