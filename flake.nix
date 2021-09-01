@@ -1,13 +1,13 @@
 {
   description = "NixOS configuration for GLaDOS";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-21.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:frostbytten/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, ... }: {
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }: {
     nixosConfigurations.glados = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -18,11 +18,6 @@
           home-manager.users.frostbytten = import ./hm-frostbytten.nix;
         }
         ({ config, pkgs, ... }:
-          let
-            overlay-unstable = final: prev: {
-              unstable = nixpkgs-unstable.legacyPackages.x86_64-linux;
-            };
-          in
           {
             imports = [ ./hardware-configuration.nix ];
             fileSystems."/" = { options = [ "noatime" "nodiratime" ]; };
@@ -97,7 +92,6 @@
            };
 
            nixpkgs = {
-             overlays = [ overlay-unstable ];
              config = {
                 allowBroken = true;
                 allowUnfree = true;
