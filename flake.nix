@@ -35,10 +35,6 @@
                   device = "nodev";
                 };
               };
-              initrd.luks.devices.crypt = {
-               device = "/dev/sda2";
-               preLVM = true;
-              };
             };
 
             time.timeZone = "America/New_York";
