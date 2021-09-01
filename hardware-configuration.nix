@@ -10,22 +10,24 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/13ebb218-5a4a-468a-9e14-aed9dcd9cf38";
-      fsType = "xfs";
+    { device = "/dev/disk/by-uuid/03941816-10c7-4bc9-badf-254f621aa678";
+      fsType = "btrfs";
     };
 
+  boot.initrd.luks.devices."croot".device = "/dev/disk/by-uuid/cc92b820-9f3b-4230-8cab-c8e540656c85";
+
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/E7B2-125A";
+    { device = "/dev/disk/by-uuid/B562-D833";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/01715292-f0e9-4773-a8e5-647e7cf9a37f"; }
+    [ { device = "/dev/disk/by-uuid/cb730ac5-bc01-4992-936a-bc70a14f6f84"; }
     ];
 
   # high-resolution display
